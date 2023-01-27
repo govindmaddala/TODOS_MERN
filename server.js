@@ -1,5 +1,6 @@
 require('dotenv').config('.env');
-const mongoose = require('mongoose')
+// const mongoose = require('mongoose')
+const { MongoClient } = require('mongodb');
 const express = require("express");
 const cors = require('cors')
 const path = require('path');
@@ -34,10 +35,9 @@ const port = process.env.port || 5000
 // app.listen(port, () => {
 //     console.log(`Server is listening on ${port}`);
 // })
-
-mongoose.connect(process.env.MONGODB_LINK_CLOUD).then(()=>{
+const client = new MongoClient(process.env.MONGODB_LINK_CLOUD);
+client.connect(()=>{
     app.listen(port);
-    // console.log(`Server is listening on ${port}`);
 }).catch((err)=>{
     console.log(err);
 })
