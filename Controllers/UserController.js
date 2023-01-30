@@ -6,7 +6,7 @@ const ErrorHandle = require('../utils/ErrorHandle');
 const createUser = CatchAsyncErrors(async (req, res, next) => {
     const { email } = req.body;
     const isExistingUser = await User.findOne({ email });
-    console.log(isExistingUser);
+    console.log("createUser",isExistingUser);
     if (isExistingUser !== null) {
         return next(new ErrorHandle("User already existed", 400));
     }
@@ -17,6 +17,7 @@ const createUser = CatchAsyncErrors(async (req, res, next) => {
 
 const getUserByID = CatchAsyncErrors(async (req, res, next) => {
     const userFound = await User.findById(req.params.id);
+    console.log("GetUSERBYID",userFound);
     if (userFound) {
         return res.status(200).json({
             message:"Our user",
@@ -31,6 +32,7 @@ const getUserByID = CatchAsyncErrors(async (req, res, next) => {
 const loginUser = CatchAsyncErrors(async(req,res,next)=>{
     const { email,password } = req.body;
     const userFound = await User.findOne({ email }).select('+password');
+    console.log("loginUser",userFound);
     if(!userFound){
         return next(new ErrorHandle("User not found", 400));
     }
