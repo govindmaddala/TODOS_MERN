@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 require('dotenv').config('../.env');
 
-const databaseConnect = () => {
+const databaseConnect = async () => {
     mongoose.connect(process.env.MONGODB_LINK_CLOUD, (err) => {
         if (err) {
             console.log(err);
