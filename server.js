@@ -1,5 +1,4 @@
 require('dotenv').config('.env');
-const { MongoClient } = require('mongodb');
 const express = require("express");
 const cors = require('cors')
 const path = require('path');
@@ -26,30 +25,8 @@ app.use('/tasks', updatedTasksAPI);
 app.use(errorHandler);
 const port = process.env.port || 5000
 
-// databaseConnect().then(()=>{
-//     app.listen(port, () => {
-//         console.log("listening for requests");
-//     })
-// });
-
 databaseConnect().then(() => {
     app.listen(port, () => {
         console.log("listening for requests");
     })
 })
-
-// app.listen(port, () => {
-//     console.log(`Server is listening on ${port}`);
-// })
-// const client = new MongoClient(process.env.MONGODB_LINK_CLOUD);
-// client.connect(()=>{
-//     app.listen(port);
-// })
-
-// client.connect(err => {
-//     if (err) { console.error(err); return false; }
-//     // connection to mongo is successful, listen for requests
-//     app.listen(port, () => {
-//         console.log("listening for requests");
-//     })
-// });
